@@ -10,7 +10,16 @@ const Stack =  createStackNavigator();
 function AppNavigator(){
   return(
     <NavigationContainer>
-       <Stack.Navigator>
+       <Stack.Navigator
+         presentation='modal'
+         headerShown={false}
+         screenOptions={{
+           cardStyle:{backgroundColor: 'transparent'},
+           cardOverlayEnabled:true,
+
+         }}
+
+       >
           <Stack.Screen
             name="Home"
             component={HomeScreen}
