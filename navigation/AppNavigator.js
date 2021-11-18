@@ -12,10 +12,25 @@ function AppNavigator(){
     <NavigationContainer>
        <Stack.Navigator
          presentation='modal'
-         headerShown={false}
          screenOptions={{
            cardStyle:{backgroundColor: 'transparent'},
            cardOverlayEnabled:true,
+           headerShown:false,
+           cardStyleInterpolator: ({ current: { progress } }) => ({
+            cardStyle: {
+              opacity: progress.interpolate({
+                inputRange: [0, 0.5, 0.9, 1],
+                outputRange: [0, 0.25, 0.7, 1]
+              })
+            },
+            overlayStyle: {
+              opacity: progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 0.5],
+                extrapolate: 'clamp'
+              })
+            }
+          })
 
          }}
 
@@ -28,6 +43,7 @@ function AppNavigator(){
           <Stack.Screen
             name="AddTask"
             component={AddTaskWindowScreen}
+
           />
 
        </Stack.Navigator>

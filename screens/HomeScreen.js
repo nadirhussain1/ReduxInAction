@@ -1,9 +1,33 @@
 import React from 'react';
-import {StyleSheet,Text,View,TouchableOpacity,Image} from 'react-native';
+import {StyleSheet,Text,View,TouchableOpacity,Image,StatusBar} from 'react-native';
+
+import Header from '../components/Header';
+
+
+function ListView() {
+  return (
+    <View
+      style={{
+        backgroundColor: 'white',
+        flex: 1,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 20
+      }}>
+      <Text>Here goes list items</Text>
+    </View>
+  )
+}
 
 function HomeScreen({navigation}){
   return(
+    <>
+  <StatusBar barStyle='light-content' />
     <View style={styles.container}>
+      <Header title={'Home'} />
+      <ListView />
+
       <View style={styles.fabContainer}>
         <TouchableOpacity
           onPress={() => navigation.navigate('AddTask')}
@@ -14,13 +38,15 @@ function HomeScreen({navigation}){
         </TouchableOpacity>
       </View>
     </View>
+
+    </>
   );
 }
 
 const styles=StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue',
+    backgroundColor: 'grey',
   },
 
   fabContainer:{
