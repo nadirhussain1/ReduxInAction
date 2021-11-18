@@ -16,25 +16,30 @@ function AddTaskWindowScreen({navigation}){
   return(
 
     <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <View style={styles.closeButtonContainer}>
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={() => navigation.goBack()}>
-            <Image source={require('../assets/close.png')} style={styles.image} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.modalContainer}>
-          <Text style={{ color: '#444', fontSize: 20 }}>
-            What do you want to do?
-          </Text>
 
-          <TextInput
-            style={styles.input}
-            numberOfLines={1}
-            clearButtonMode='while-editing'
-            onChangeText={value=>setValue(value)}
-          />
+        <View style={styles.closeButtonContainer}>
+           <TouchableOpacity
+             style={styles.closeButton}
+              onPress={() => navigation.goBack()}>
+
+                <Image source={require('../assets/close.png')} style={styles.image} />
+           </TouchableOpacity>
+       </View>
+
+
+
+        <View style={styles.modalContainer}>
+
+             <Text style={{ color: '#444', fontSize: 20 }}>
+                What do you want to do?
+             </Text>
+
+           <TextInput
+              style={styles.input}
+              numberOfLines={1}
+              clearButtonMode='while-editing'
+              onChangeText={value=>setValue(value)}
+            />
 
           <TouchableOpacity
             onPress={() => onSaveNote(value)}>
@@ -45,16 +50,13 @@ function AddTaskWindowScreen({navigation}){
 
         </View>
       </View>
-    </View>
+
 
   );
 }
 
 const styles=StyleSheet.create({
-  container: {
-   flex: 1
- },
- innerContainer: {
+ container: {
    borderTopLeftRadius: 10,
    borderTopRightRadius: 10,
    justifyContent: 'flex-end',
@@ -66,6 +68,15 @@ const styles=StyleSheet.create({
    right: 0,
    backgroundColor: '#fff'
  },
+
+ modalContainer: {
+   flex:1,
+   flexDirection:'column',
+   justifyContent: 'center',
+   alignItems: 'center',
+   marginTop:50,
+ },
+
  closeButtonContainer: {
    position: 'absolute',
    alignItems: 'flex-end',
@@ -93,7 +104,7 @@ const styles=StyleSheet.create({
  },
 
  done:{
-   width: 200,
+   width: 300,
    textAlign:'center',
    paddingVertical:8,
    marginTop:24,
@@ -104,14 +115,7 @@ const styles=StyleSheet.create({
 
  },
 
- modalContainer: {
-   justifyContent: 'center',
-   alignItems: 'center',
-   position: 'absolute',
-   margin: 60,
-   top: 10,
-   left: 50
- }
+
 });
 
 export default AddTaskWindowScreen;

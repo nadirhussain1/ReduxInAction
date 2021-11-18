@@ -1,4 +1,6 @@
 import {ADD_ITEM} from './actions';
+import {REMOVE_ITEM} from './actions';
+
 
 
 const initialState = {
@@ -15,7 +17,13 @@ const rootReducer = (state=initialState, action) => {
            name:action.payload
          })
        }
-      break;
+
+      case REMOVE_ITEM:
+         return{
+           ...state,
+           itemList:state.itemList.filter(item => item.id !== action.payload)
+         }
+        
     default:
     return state;
 

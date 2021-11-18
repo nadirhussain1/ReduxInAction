@@ -1,12 +1,29 @@
 import React from 'react';
-import {StyleSheet,Text,View,TouchableOpacity,Image,StatusBar} from 'react-native';
-import {useSelector} from 'react-redux';
+import {StyleSheet,Text,View,TouchableOpacity,Image,StatusBar,FlatList} from 'react-native';
+import {useSelector,useDispatch} from 'react-redux';
+
 
 import Header from '../components/Header';
+import {removeItem} from '../redux/actions';
+
 
 
 function ListView() {
   const items=useSelector(state=>state.itemList)
+  const dispatch = useDispatch();
+
+
+  function renderItem({item}){
+      return(
+        <View style={styles.listItemContainer}>
+            <Text style={styles.itemTitle} numberOfLines={1}>  {item.name} </Text>
+            <TouchableOpacity onPress={() => dispatch(removeItem(item.id))}>
+                 <Text style={styles.remove}> Remove </Text>
+            </TouchableOpacity>
+
+        </View>
+      );
+  }
 
   return (
     <View
@@ -24,9 +41,13 @@ function ListView() {
        }
 
        {(items.length !==0 ) &&
-         <Text>List contains {items.length} items</Text>
+         <FlatList
+           data={items}
+           keyExtractor={item => item.id.toString()}
+           renderItem={item => renderItem(item)}
+          />
        }
-    
+
     </View>
   )
 }
@@ -81,7 +102,26 @@ const styles=StyleSheet.create({
     width:70,
     height:70,
 
-  }
+  },
+  listItemContainer: {
+   flex: 1,
+   flexDirection: 'row',
+   paddingTop: 10,
+   paddingBottom: 5,
+   paddingRight: 5,
+   justifyContent: 'space-between',
+   width: '100%',
+   borderBottomWidth: 0.25
+ },
+ itemTitle: {
+    fontSize: 22,
+    fontWeight: '400'
+  },
+  remove: {
+     color:'red',
+     fontSize: 18,
+     fontWeight: 'bold'
+  },
 
 });
 
