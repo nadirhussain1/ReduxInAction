@@ -1,7 +1,18 @@
-import React from 'react';
+import React , {useState} from 'react';
 import {StyleSheet,Text,View,TouchableOpacity,Image,TextInput} from 'react-native';
+import {useDispatch} from 'react-redux'
+import {addItem} from '../redux/actions';
 
 function AddTaskWindowScreen({navigation}){
+  const[value, setValue] = useState('')
+  const dispatch=useDispatch()
+
+  const onSaveNote = value =>{
+     dispatch(addItem(value));
+
+     navigation.navigate('Home');
+  }
+
   return(
 
     <View style={styles.container}>
@@ -22,9 +33,15 @@ function AddTaskWindowScreen({navigation}){
             style={styles.input}
             numberOfLines={1}
             clearButtonMode='while-editing'
+            onChangeText={value=>setValue(value)}
           />
 
-          <Text style={styles.done}> DONE </Text>
+          <TouchableOpacity
+            onPress={() => onSaveNote(value)}>
+
+              <Text style={styles.done}> DONE </Text>
+          </TouchableOpacity>
+
 
         </View>
       </View>
