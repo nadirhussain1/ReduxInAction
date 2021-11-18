@@ -1,3 +1,6 @@
+import {ADD_ITEM} from './actions';
+
+
 const initialState = {
   itemList:[],
 }
